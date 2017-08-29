@@ -1,0 +1,23 @@
+[core]
+    filemode = false
+    editor = vim
+
+[color]
+    ui = true
+
+[user]
+    name = Jay Amorin
+    email = 17937853+jayamorin@users.noreply.github.com
+
+[push]
+    default = simple
+
+[diff]
+    renames = true
+
+[http]
+    sslVerify = true
+
+[credential]
+    helper = cache
+    timeout = 86400
