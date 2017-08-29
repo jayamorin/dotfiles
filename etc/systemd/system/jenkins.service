@@ -1,0 +1,12 @@
+[Unit]
+Description=Jenkins Daemon
+
+[Service]
+User=
+Group=
+WorkingDirectory=/opt/jenkins
+Environment=JENKINS_HOME=/opt/jenkins JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+ExecStart=/usr/lib/jvm/java-8-oracle/bin/java -Xmx1024m -Xms1024m -XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent -XX:+ParallelRefProcEnabled -XX:+UseStringDeduplication -XX:+UnlockDiagnosticVMOptions -XX:G1SummarizeRSetStatsPeriod=1 -Djava.awt.headless=true -jar /opt/jenkins/jenkins.war --httpPort=8080 --httpListenAddress=127.0.0.1
+
+[Install]
+WantedBy=multi-user.target

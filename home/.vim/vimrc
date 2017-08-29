@@ -1,0 +1,152 @@
+set nocompatible
+set number
+set backspace=indent,eol,start
+set history=1000
+set undolevels=1000
+set showcmd
+set showmode
+set gcr=a:blinkon0
+
+set autoread
+set hidden
+syntax on
+let mapleader=","
+set showmatch
+set ruler
+
+set encoding=utf-8
+set fileencodings=utf-8
+set textwidth=200
+set paste
+set pastetoggle=<F3>
+set mouse=a
+
+set sessionoptions-=options
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=8
+set expandtab
+
+filetype off
+filetype plugin on
+filetype indent on
+
+set nowrap
+set linebreak
+
+set guioptions+=m
+
+set foldmethod=manual
+set foldnestmax=3
+set foldenable
+
+set wildmode=list:longest,full
+set wildmenu
+set wildignore=*.o,*.obj,*~
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.swp
+set wildignore+=*.bak,*-bak
+set wildignore+=*.pyc
+set wildignore+=*.class
+set wildignore+=__pycache__/**
+
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
+set scrolloff=8
+set sidescrolloff=15
+set sidescroll=1
+
+set dictionary+=/usr/share/dict/words
+
+colorscheme monokai
+let g:molokai_original = 1
+
+set noswapfile
+set nobackup
+set nowb
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+set autochdir
+
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+filetype plugin indent on
+syntax on
+
+nmap <F8> :TagbarToggle<CR>
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+autocmd BufEnter * NERDTreeMirror
+let NERDTreeChDirMode=2
+let NERDTreeShowHidden=1
+let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore = ['\.pyc$', '\.tar$', '__pycache__$', '\.jpg$', '-bak$', '\.git$', '\.idea$', '\.ropeproject$']
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+function! s:CloseIfOnlyNerdTreeLeft()
+    if exists("t:NERDTreeBufName")
+        if bufwinnr(t:NERDTreeBufName) != -1
+            if winnr("$") == 1
+                q
+            endif
+        endif
+    endif
+endfunction
+
+function! WriteBackup()
+    let l:fname = expand("%:p") . '.' . strftime('%Y%m%d%H%M%S') . '-bak'
+    silent execute 'write' l:fname
+    echomsg 'Wrote' l:fname
+endfunction
+nnoremap <Leader>ba :<C-U>call WriteBackup()<CR>
+
+if has('persistent_undo')
+    silent !mkdir ~/.vim/backups > /dev/null 2>&1
+    set undodir=~/.vim/backups
+    set undofile
+endif
+
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+let g:pymode_python = 'python3'
+let g:pymode_folding = 0
+let g:virtualenv_directory = '~/.virtualenvs'
+let g:virtualenv_stl_format = '(%n)'
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_unmodified = 1
+let g:pymode_lint_on_fly = 1
+let g:pymode_lint_checkers = ['pylint', 'pyflakes', 'pep8']
+let g:pymode_rope_lookup_project = 1
+let g:pymode_rope_ropefolder='.ropeproject'
+let g:pymode_rope_autoimport = 1
+
+set laststatus=2
+
+highlight MBEVisibleNormal term=bold cterm=bold gui=bold guifg=Green
+highlight MBEVisibleChanged term=bold cterm=bold gui=bold guifg=Green
