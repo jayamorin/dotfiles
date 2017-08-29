@@ -125,11 +125,11 @@ git clone https://github.com/aurelien-rainone/tmux-gitbar.git ~/.tmux-gitbar
 ## Git
 
 1. Copy configuration file [home/.gitconfig](https://github.com/jayamorin/dotfiles/blob/master/home/.gitconfig) to ~/.gitconfig and update the following with your own entry.
-    ```
-    [user]
-        name = Jay Amorin
-        email = 17937853+jayamorin@users.noreply.github.com
-    ```
+```
+[user]
+    name = Jay Amorin
+    email = 17937853+jayamorin@users.noreply.github.com
+```
 
 
 ## Noteworthy dotfiles
