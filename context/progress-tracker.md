@@ -28,6 +28,7 @@ Update this file after every meaningful change.
 
 ## Verification Log
 
+- 2026-11-20 — #8 / PR #9 (gh-merge): the three merged chore branches had no commit missing from `main` (`git cherry`) and were deleted on GitHub and locally, with the two local branches of the archived repository; CI green on the PR. This PR's own branch is deleted right after its merge (criteria 1–2, checked on issue #8)
 - 2026-11-20 — #6 / PR #7 — 4 of 5 criteria met before the merge (gh-merge): `main` is the default and `master` is gone on GitHub (renamed, open PR #5 retargeted and merged into `main`); README → Update; the maintainer's checkout tracks `origin/main` with no local `master`; tracker. CI green on the PR (macOS, Ubuntu, WSL). Criterion 2 (CI on a push to `main`) waits for the merge's push run (To Verify)
 - 2026-11-20 — first push to `master` after PR #3: CI run 44755165034 passed on macOS, Ubuntu and WSL
 - 2026-11-20 — #2 / PR #3 — ✅ all 5 criteria met (gh-merge): make check, shellcheck, gitleaks on the tree and the new commit, privacy and private-name greps clean; CI green on macOS, Ubuntu, WSL (https://github.com/jayamorin/dotfiles/issues/2#issuecomment-7042227455)
