@@ -93,10 +93,16 @@ In Claude Code, type `/gh-`: you should see `/gh-task`, `/gh-issue`, `/gh-verify
 ## Update
 
 ```bash
-cd ~/Workspace/dotfiles && git checkout master && git pull && ./install.sh --with-claude-md --with-settings
+cd ~/Workspace/dotfiles && git checkout main && git pull && ./install.sh --with-claude-md --with-settings
 ```
 
-This switches the checkout back to `master` (in case you were on a branch), pulls the latest, and re-runs the installer: new files get linked, an appended `CLAUDE.md` block is refreshed, and new team settings are merged. It's safe to run any time; nothing you didn't install is overwritten. Restart Claude Code afterwards.
+This switches the checkout back to `main` (in case you were on a branch), pulls the latest, and re-runs the installer: new files get linked, an appended `CLAUDE.md` block is refreshed, and new team settings are merged. It's safe to run any time; nothing you didn't install is overwritten. Restart Claude Code afterwards.
+
+A checkout made before the default branch was renamed from `master` (2026-11-20) switches once:
+
+```bash
+cd ~/Workspace/dotfiles && git branch -m master main && git fetch origin && git branch -u origin/main main && git remote set-head origin -a
+```
 
 ## Uninstall
 

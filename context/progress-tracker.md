@@ -8,6 +8,7 @@ Update this file after every meaningful change.
 
 ## Known Issues
 
+8. [minor] **The archived private repository's pointer says `git checkout -B master origin/master`** (2026-11-20, #6) — it's read-only, so it can't be updated without unarchiving; the command still works through GitHub's redirect from `master` to `main`, and README → Update here has the one-time switch
 1. [minor] **The old commits keep a personal address** (2026-11-20, #2) — some of the 6 commits from before #2 are authored with a personal Gmail address, public since they were pushed. New commits use the GitHub noreply address. Removing it needs a history rewrite and force-push of `master`; not done
 2. [minor] **Install location is fixed to `~/.claude`** — the commands call `~/.claude/skills/gh-flow/scripts/gh-flow.sh` by path, so `CLAUDE_CONFIG_DIR` isn't supported
 3. [minor] **An appended `CLAUDE.md` block doesn't update on `git pull`** — only linked installs do; people with their own `CLAUDE.md` re-run `./install.sh --with-claude-md` after a pull (README → Update)
@@ -33,7 +34,8 @@ Update this file after every meaningful change.
 ## Architecture Decisions
 
 - **Published as one commit, without the private history (2026-11-20, #2, user):** the private repository's 31 commits carry a personal email, internal issue links and notes about the maintainer's machine; the public repo gets the current files in one commit authored with the GitHub noreply address, and a fresh tracker. The private repository is archived with a pointer here. Rejected: pushing the full history (exposes the email and internal links), publishing the old tracker as is
-- **`master` stays the default branch (2026-11-20, #2):** renaming it would change existing clone and link URLs; `check.yml` and README → Update use `master`; gh-flow and gh-merge detect the base on their own
+- ~~**`master` stays the default branch (2026-11-20, #2):** renaming it would change existing clone and link URLs~~ — replaced 2026-11-20 (#6, user): the default branch is `main`
+- **The default branch is `main` (2026-11-20, #6, user):** renamed with GitHub's branch rename (`POST /repos/{owner}/{repo}/branches/master/rename`), which makes `main` the default, removes `master`, retargets open PRs and redirects old `master` links; `check.yml` and README → Update use `main`, and README shows the one-time switch for old checkouts. Rejected: pushing `main` and deleting `master` by hand (no redirects, open PRs would close)
 - **LICENSE kept (2026-11-20, #2):** the MIT license is the one file from the old configs that stays; the skills declare `license: MIT`
 - **The privacy check covers the tracker and personal email addresses (2026-11-20, #2):** `make privacy` no longer skips `context/` and fails on addresses at common personal mail providers, since everything here is public
 - **Symlink by default, never overwrite:** `git pull` updates every install; `--copy` for people who move the checkout. Anything at a target that `install.sh` didn't put there goes to `~/.dotfiles-backups/<timestamp>/`
