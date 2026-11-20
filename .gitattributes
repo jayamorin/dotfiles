@@ -1,0 +1,2 @@
+# Force LF in every checkout, including Windows with core.autocrlf=true: bash can't run scripts with CRLF.
+* text=auto eol=lf
