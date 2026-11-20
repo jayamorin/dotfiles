@@ -18,12 +18,14 @@ Update this file after every meaningful change.
 
 ## To Verify
 
-- [major] #2: CI passes on macOS, Ubuntu and Windows/WSL on the first PR and on the first push to `master` (`check.yml` now triggers on `master`)
+- [major] #2: CI passes on the first push to `master` (`check.yml` now triggers on `master`); the PR run passed on all three (run 44754524443)
 - [major] A person installs from the README on a clean machine with the public clone URL (clone → `./install.sh --with-claude-md --with-settings` → restart → `/gh-task` listed → `gh-flow.sh repo` in a GitHub repo)
 - [major] gh-merge in a real session in another repo: "merge PR <n>" triggers it, it ticks only met criteria, blocks on a failing check, merges with the repo's method and keeps the branch, and closes the issue only when every box is ticked
 - [minor] A real Windows machine through WSL 2, following README → Windows
 
 ## Verification Log
+
+- 2026-11-20 — #2 / PR #3 — ✅ all 5 criteria met (gh-merge): make check, shellcheck, gitleaks on the tree and the new commit, privacy and private-name greps clean; CI green on macOS, Ubuntu, WSL (https://github.com/jayamorin/dotfiles/issues/2#issuecomment-7042227455)
 
 ## Open Questions
 
