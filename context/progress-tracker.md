@@ -18,13 +18,14 @@ Update this file after every meaningful change.
 
 ## To Verify
 
-- [major] #2: CI passes on the first push to `master` (`check.yml` now triggers on `master`); the PR run passed on all three (run 44754524443)
+- ~~[major] #2: CI passes on the first push to `master` (`check.yml` now triggers on `master`); the PR run passed on all three (run 44754524443)~~ — verified 2026-11-20: push run 44755165034 passed
 - [major] A person installs from the README on a clean machine with the public clone URL (clone → `./install.sh --with-claude-md --with-settings` → restart → `/gh-task` listed → `gh-flow.sh repo` in a GitHub repo)
 - [major] gh-merge in a real session in another repo: "merge PR <n>" triggers it, it ticks only met criteria, blocks on a failing check, merges with the repo's method and keeps the branch, and closes the issue only when every box is ticked
 - [minor] A real Windows machine through WSL 2, following README → Windows
 
 ## Verification Log
 
+- 2026-11-20 — first push to `master` after PR #3: CI run 44755165034 passed on macOS, Ubuntu and WSL
 - 2026-11-20 — #2 / PR #3 — ✅ all 5 criteria met (gh-merge): make check, shellcheck, gitleaks on the tree and the new commit, privacy and private-name greps clean; CI green on macOS, Ubuntu, WSL (https://github.com/jayamorin/dotfiles/issues/2#issuecomment-7042227455)
 
 ## Open Questions
@@ -42,7 +43,7 @@ Update this file after every meaningful change.
 
 ## Next Steps
 
-1. After the merge: archive the private repository with a pointer here, and repoint existing checkouts (`git remote set-url origin https://github.com/jayamorin/dotfiles.git`, then `git checkout master && git pull`)
+1. ~~After the merge: archive the private repository with a pointer here, and repoint existing checkouts~~ — done 2026-11-20: the private repository's README points here and it is archived read-only; the maintainer's checkout tracks this repo (`origin`), the old remote kept as `spaghetti`. Other people's checkouts switch with the command in that README
 
 ## Suggestions / Future Suggestions
 
