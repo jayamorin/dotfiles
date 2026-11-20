@@ -19,6 +19,7 @@ Update this file after every meaningful change.
 
 ## To Verify
 
+- [minor] #6: the merge of PR #7 is the first push to `main`; its CI run passes on all three systems (`check.yml` now triggers on `main`). Recorded on issue #6 when it runs
 - ~~[major] #2: CI passes on the first push to `master` (`check.yml` now triggers on `master`); the PR run passed on all three (run 44754524443)~~ — verified 2026-11-20: push run 44755165034 passed
 - [major] A person installs from the README on a clean machine with the public clone URL (clone → `./install.sh --with-claude-md --with-settings` → restart → `/gh-task` listed → `gh-flow.sh repo` in a GitHub repo)
 - [major] gh-merge in a real session in another repo: "merge PR <n>" triggers it, it ticks only met criteria, blocks on a failing check, merges with the repo's method and keeps the branch, and closes the issue only when every box is ticked
@@ -26,6 +27,7 @@ Update this file after every meaningful change.
 
 ## Verification Log
 
+- 2026-11-20 — #6 / PR #7 — 4 of 5 criteria met before the merge (gh-merge): `main` is the default and `master` is gone on GitHub (renamed, open PR #5 retargeted and merged into `main`); README → Update; the maintainer's checkout tracks `origin/main` with no local `master`; tracker. CI green on the PR (macOS, Ubuntu, WSL). Criterion 2 (CI on a push to `main`) waits for the merge's push run (To Verify)
 - 2026-11-20 — first push to `master` after PR #3: CI run 44755165034 passed on macOS, Ubuntu and WSL
 - 2026-11-20 — #2 / PR #3 — ✅ all 5 criteria met (gh-merge): make check, shellcheck, gitleaks on the tree and the new commit, privacy and private-name greps clean; CI green on macOS, Ubuntu, WSL (https://github.com/jayamorin/dotfiles/issues/2#issuecomment-7042227455)
 
