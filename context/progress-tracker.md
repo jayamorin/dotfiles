@@ -4,6 +4,7 @@ Update this file after every meaningful change.
 
 ## Current State
 
+- #8 (2026-11-20): merged branches deleted on GitHub and in the maintainer's checkout; only `main` remains (each had no commit missing from `main`). gh-flow keeps a branch after its push; deleting merged ones is done on request
 - #2 (2026-11-20): the outdated Ubuntu 17.04 configs (Jenkins, Vim, tmux, git) are replaced by the Claude Code dotfiles: a `claude/` component (global `CLAUDE.md`, team `settings.json`, the gh-flow, gh-merge and plan-first skills, `/gh-task`, `/gh-issue`, `/gh-verify`, `/gh-merge`) installed by `install.sh`, with installer tests and CI on macOS, Ubuntu and Windows/WSL. Published from a private repository as one commit
 
 ## Known Issues
@@ -19,7 +20,7 @@ Update this file after every meaningful change.
 
 ## To Verify
 
-- [minor] #6: the merge of PR #7 is the first push to `main`; its CI run passes on all three systems (`check.yml` now triggers on `main`). Recorded on issue #6 when it runs
+- ~~[minor] #6: the merge of PR #7 is the first push to `main`; its CI run passes on all three systems (`check.yml` now triggers on `main`). Recorded on issue #6 when it runs~~ — verified 2026-11-20: push run 44761237499 on `f327414` passed on macOS, Ubuntu and WSL (issue #6 closed)
 - ~~[major] #2: CI passes on the first push to `master` (`check.yml` now triggers on `master`); the PR run passed on all three (run 44754524443)~~ — verified 2026-11-20: push run 44755165034 passed
 - [major] A person installs from the README on a clean machine with the public clone URL (clone → `./install.sh --with-claude-md --with-settings` → restart → `/gh-task` listed → `gh-flow.sh repo` in a GitHub repo)
 - [major] gh-merge in a real session in another repo: "merge PR <n>" triggers it, it ticks only met criteria, blocks on a failing check, merges with the repo's method and keeps the branch, and closes the issue only when every box is ticked
@@ -35,6 +36,7 @@ Update this file after every meaningful change.
 
 ## Architecture Decisions
 
+- **Merged branches are deleted on request, not by gh-flow or gh-merge (2026-11-20, #8, user):** both keep branches by rule; a cleanup like #8 checks first that a branch has no commit missing from `main` (`git cherry`). The local `spaghetti` remote (the archived private repository) is kept for its history. Rejected: deleting branches in gh-merge's merge step (the rule exists so review links keep working)
 - **Published as one commit, without the private history (2026-11-20, #2, user):** the private repository's 31 commits carry a personal email, internal issue links and notes about the maintainer's machine; the public repo gets the current files in one commit authored with the GitHub noreply address, and a fresh tracker. The private repository is archived with a pointer here. Rejected: pushing the full history (exposes the email and internal links), publishing the old tracker as is
 - ~~**`master` stays the default branch (2026-11-20, #2):** renaming it would change existing clone and link URLs~~ — replaced 2026-11-20 (#6, user): the default branch is `main`
 - **The default branch is `main` (2026-11-20, #6, user):** renamed with GitHub's branch rename (`POST /repos/{owner}/{repo}/branches/master/rename`), which makes `main` the default, removes `master`, retargets open PRs and redirects old `master` links; `check.yml` and README → Update use `main`, and README shows the one-time switch for old checkouts. Rejected: pushing `main` and deleting `master` by hand (no redirects, open PRs would close)
